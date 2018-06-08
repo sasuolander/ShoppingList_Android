@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Minunohjelma</string>
+    <string name="add">lisaa</string>
+    <string name="New_Item">uusi tuote</string>
+    <string name="intruction_button">ohjeet</string>
+    <string name="Save_Data">tallenna data</string>
+    <string name="Instruction">ohjeeet</string>
+    <string name="Add_Item">Lisaa tuote</string>
+    <string name="title_activity_shopping_list">tuotelista</string>
+    <string name="item">tuote</string>
+</resources>
