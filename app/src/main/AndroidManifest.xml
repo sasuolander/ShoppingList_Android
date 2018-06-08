@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sasu.shoppinglistjava">
+    package="com.sasu.shoppinglist">
 
     <uses-sdk android:minSdkVersion="21" />
 

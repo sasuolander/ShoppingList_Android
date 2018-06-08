@@ -10,7 +10,6 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
-import com.sasu.shoppinglistjava.R
 import java.util.HashSet
 
 import com.sasu.shoppinglist.NewShoppingItem.Companion.Items
