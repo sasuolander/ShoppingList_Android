@@ -4,11 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.webkit.WebView
 
-
-/**
- * Created by sasu on 8.6.2018.
- */
-class Instructions :Activity() {
+class Instructions: Activity() {
      override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.insructions)

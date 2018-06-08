@@ -3,7 +3,6 @@ package com.sasu.shoppinglist
 import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,11 +13,10 @@ import java.util.HashSet
 
 import com.sasu.shoppinglist.NewShoppingItem.Companion.Items
 
-class ShoppingListMainMenu : AppCompatActivity() {
+class ShoppingListMainMenu: AppCompatActivity() {
 
-    internal var adapter: ArrayAdapter<String>?=null
-    val mypreference = "mypref"
-    val lista = "lista"
+    private var adapter: ArrayAdapter<String>?=null
+    private val lista = "lista"
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
@@ -26,41 +24,22 @@ class ShoppingListMainMenu : AppCompatActivity() {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
             R.id.addItem_menu -> {
-                //Log.d("test_user", "Add Item");
-                val siirtoseuraavaanNewShoppingItem = Intent(this@ShoppingListMainMenu, NewShoppingItem::class.java)
-                this.startActivity(siirtoseuraavaanNewShoppingItem)
-                return true
-            }
+                this.startActivity(Intent(this@ShoppingListMainMenu, NewShoppingItem::class.java))
+                 true }
             R.id.instructions_menu -> {
-                //Log.d("test_user", "Instruction");
-                val siirtoseuraavaanInstructions = Intent(this@ShoppingListMainMenu, Instructions::class.java)
-                this.startActivity(siirtoseuraavaanInstructions)
-                return true
-            }
+                this.startActivity(Intent(this@ShoppingListMainMenu, Instructions::class.java))
+                 true }
             R.id.SaveData -> {
-                val sharedpreferences = getSharedPreferences(mypreference, Context.MODE_PRIVATE)
-                val editor = sharedpreferences.edit()
-                editor.putStringSet(lista, NewShoppingItem.Items)
-                editor.apply()
-                return super.onOptionsItemSelected(item)
-            }
-            else -> return super.onOptionsItemSelected(item)
+                saveData()
+                 super.onOptionsItemSelected(item) }
+            else ->  super.onOptionsItemSelected(item)
         }
-    }
-
-    fun naytaToast(teksti: String) {
-        val aika = Toast.LENGTH_LONG
-        val context = applicationContext
-        val toast = Toast.makeText(context, teksti, aika)
-        toast.show()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        NewShoppingItem.Items.addAll(Load_data())
+        NewShoppingItem.Items.addAll(loadData())
         setContentView(R.layout.activity_shopping_list_mainenu)
         val lista:ListView = findViewById(R.id.ShoppingItem)
         if ( Items.size > 0) {
@@ -68,7 +47,7 @@ class ShoppingListMainMenu : AppCompatActivity() {
                     android.R.layout.simple_expandable_list_item_1,
                     Items.toTypedArray()
                     )
-            lista.adapter
+            lista.adapter =adapter
         }
         val btAdd: Button  = findViewById(R.id.addItem)
         val btIntruction: Button = findViewById(R.id.instructions)
@@ -84,20 +63,27 @@ class ShoppingListMainMenu : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        save_data()
+        saveData()
     }
 
-    protected fun Load_data(): Set<String> {
+    private fun loadData(): Set<String> {
         val sharedpreferences = getPreferences(Context.MODE_PRIVATE)
         return sharedpreferences.getStringSet(lista, HashSet())
     }
 
-    fun save_data() {
+    private fun saveData() {
         val sharedpreferences = getPreferences(Context.MODE_PRIVATE)
         val editor = sharedpreferences.edit()
         editor.putStringSet(lista, NewShoppingItem.Items)
         editor.apply()
     }
 
-
+    /*
+    fun naytaToast(teksti: String) {
+        val aika = Toast.LENGTH_LONG
+        val context = applicationContext
+        val toast = Toast.makeText(context, teksti, aika)
+        toast.show()
+    }
+    */
 }
